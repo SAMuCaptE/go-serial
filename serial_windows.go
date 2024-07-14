@@ -376,10 +376,6 @@ func nativeOpen(portName string, mode *Mode) (*windowsPort, error) {
 	params.XoffLim = 512
 	params.XonChar = 17  // DC1
 	params.XoffChar = 19 // C3
-	if windows.SetCommState(port.handle, params) != nil {
-		port.Close()
-		return nil, &PortError{code: InvalidSerialPort}
-	}
 
 	if port.SetReadTimeout(NoTimeout) != nil {
 		port.Close()
